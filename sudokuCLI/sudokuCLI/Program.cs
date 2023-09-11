@@ -66,7 +66,42 @@ namespace sudokuCLI
                 Console.WriteLine($"A(z) {szam}x{szam} méretű feladványból {meretSzerint.Count} darab van tárolva");
             }
 
+            Random random = new Random();
 
+            Feladvany valasztottFeladvany = meretSzerint[random.Next(meretSzerint.Count)];
+
+            Console.WriteLine("5. feladat: A kiválasztott feladvány:");
+            string[] sorok = valasztottFeladvany.Kezdo.Split('\n');
+
+            foreach (string sor in sorok)
+            {
+                Console.WriteLine(sor);
+            }
+
+            int kitoltottMezokSzama = 0;
+            int meret = valasztottFeladvany.Meret;
+
+            foreach (char karakter in valasztottFeladvany.Kezdo)
+            {
+                if (karakter != '0')
+                {
+                    kitoltottMezokSzama++;
+                }
+            }
+
+            int kitoltottseg = (int)(((double)kitoltottMezokSzama / (meret * meret)) * 100);
+
+            Console.WriteLine($"A feladvány kitöltöttsége: {kitoltottseg}%");
+            using (StreamWriter writer = new StreamWriter("sudoku" + meret + ".txt"))
+            {
+                foreach (var feladvany in meretSzerint)
+                {
+                    writer.WriteLine(feladvany.Kezdo);
+                }
+            }
+            Console.WriteLine("7.feladat: A feladvány kirajzolva: ");
+            valasztottFeladvany.Kirajzol();
+            Console.WriteLine("8. feladat: A " + meret + "x" + meret + " méretű feladványok ki lettek válogatva.");
 
             Console.ReadKey();
         }
