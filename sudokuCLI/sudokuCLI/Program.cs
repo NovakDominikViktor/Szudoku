@@ -34,6 +34,40 @@ namespace sudokuCLI
 
             Console.WriteLine($"3. feladat: Beolvasva {feladvanyok.Count} feladvány ");
 
+        
+
+            int szam;
+
+            do
+            {
+                Console.Write("4. feladat: Kérem a feladvány méretét [4..9]: ");
+
+                szam = Convert.ToInt32(Console.ReadLine());
+            }
+            while (szam < 4 || szam > 9);
+        
+            List<Feladvany> meretSzerint = new List<Feladvany>();
+
+            foreach(Feladvany feladvanyMeret in feladvanyok)
+            {
+                if (feladvanyMeret.Meret == szam)
+                {
+                    meretSzerint.Add(feladvanyMeret);
+                }
+            }
+
+            if(meretSzerint.Count == 0)
+            {
+                Console.WriteLine("Nincs ilyen feladvány");
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"A(z) {szam}x{szam} méretű feladványból {meretSzerint.Count} darab van tárolva");
+            }
+
+
+
             Console.ReadKey();
         }
     }
